@@ -1,6 +1,8 @@
 package top.xiongmingcai;
 
 
+import top.xiongmingcai.i18n.I18N;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -18,7 +20,12 @@ public class Application {
             String language = properties.getProperty("language");
 
             System.out.println("language = " + language);//language = top.xiongmingcai.i18n.Zhcn
-        } catch (IOException e) {
+
+            I18N i18N = (I18N) Class.forName(language).newInstance();
+
+            String say = i18N.say();
+            System.out.println("say = " + say);//say = 生命不息 奋斗不止!
+        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
